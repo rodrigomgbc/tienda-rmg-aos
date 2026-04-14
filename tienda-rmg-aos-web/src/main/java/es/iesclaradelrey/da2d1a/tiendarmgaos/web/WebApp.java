@@ -3,11 +3,12 @@ package es.iesclaradelrey.da2d1a.tiendarmgaos.web;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+ "es.iesclaradelrey.da2d1a.tiendarmgaos.web",
+ "es.iesclaradelrey.da2d1a.tiendarmgaos.common"
+})
 public class WebApp {
-
     public static void main(String[] args) {
         SpringApplication.run(WebApp.class, args);
     }
-
 }
