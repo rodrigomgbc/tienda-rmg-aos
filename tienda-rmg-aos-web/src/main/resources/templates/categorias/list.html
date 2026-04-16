@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RawBean — Categorías</title>
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/vendor.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon-16x16.png}">
+
+</head>
+
+<body id="top">
+
+<!-- preloader -->
+<div id="preloader">
+    <div id="loader" class="dots-fade">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<!-- page wrap -->
+<div id="page" class="s-pagewrap">
+
+    <!-- # site header -->
+    <header class="s-header">
+        <div class="container s-header__content">
+
+            <div class="s-header__block">
+                <div class="header-logo">
+                    <a class="logo" th:href="@{/}">
+                        <span style="font-size: 2rem; font-weight: bold; color: white;">RawBean</span>
+                    </a>
+                </div>
+                <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="header-nav__links">
+                    <li><a th:href="@{/static}">Inicio</a></li>
+                    <li class="current"><a th:href="@{/templates/categorias}">Tienda</a></li>
+                </ul>
+                <div class="header-contact">
+                    <a href="mailto:hola@rawbean.es" class="header-contact__num btn">
+                        hola@rawbean.es
+                    </a>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- # categorias -->
+    <section class="container" style="padding-top: 12rem; padding-bottom: 6rem;">
+
+        <div class="row">
+            <div class="column xl-12">
+                <div class="section-header" data-num="01">
+                    <h2 class="text-display-title">Nuestras Categorías</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 4rem;">
+
+            <!-- Una tarjeta por cada categoría -->
+            <div class="column xl-3 lg-4 md-6 mob-12"
+                 th:each="categoria : ${categorias}"
+                 style="margin-bottom: 4rem;">
+
+                <!-- Imagen de la categoría, o imagen genérica si no tiene -->
+                <figure>
+                    <img th:if="${categoria.imagen != null}"
+                         th:src="@{/images/categories/__${categoria.imagen}__}"
+                         th:alt="${categoria.nombre}"
+                         style="width: 100%; height: 220px; object-fit: cover;">
+
+                    <img th:if="${categoria.imagen == null}"
+                         th:src="@{/images/categories/no-image.webp}"
+                         alt="Imagen no disponible"
+                         style="width: 100%; height: 220px; object-fit: cover;">
+                </figure>
+
+                <h4 th:text="${categoria.nombre}" style="margin-top: 1.5rem;"></h4>
+                <p th:text="${categoria.descripcion}"></p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- # footer -->
+    <footer id="footer" class="container s-footer">
+
+        <div class="row s-footer__bottom">
+            <div class="column xl-6 lg-12">
+                <p class="ss-copyright">
+                    <span>© RawBean 2025</span>
+                    <span>Design by <a href="https://styleshout.com/">StyleShout</a></span>
+                </p>
+            </div>
+        </div>
+
+        <div class="ss-go-top">
+            <a class="smoothscroll" title="Back to Top" href="#top">
+                <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+            </a>
+            <span>Back To Top</span>
+        </div>
+
+    </footer>
+
+</div> <!-- end page-wrap -->
+
+<!-- Java Script -->
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

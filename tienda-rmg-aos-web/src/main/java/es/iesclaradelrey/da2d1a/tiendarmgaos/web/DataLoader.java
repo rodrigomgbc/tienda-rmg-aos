@@ -17,9 +17,9 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        categoryService.guardar(new Category(1L, "Arábica", "Cafés de variedad arábca, reconocidos por su suavidad y complejidad aromática.", "arabica.jpg", true));
-        categoryService.guardar(new Category(1L, "Robusta", "Cafés de variedad robusta, con mayor cuerpo y contenido en cafeína.", "robusta.jpg", true));
-        categoryService.guardar(new Category(3L, "Tueste Claro", "Cafés con tueste claro, que preservan las notas florales y frutales del origen.", "tueste-claro.jpg", true));
+        categoryService.guardar(new Category(1L, "Arábica", "Cafés de variedad arábca, reconocidos por su suavidad y complejidad aromática.", null, true));
+        categoryService.guardar(new Category(2L, "Robusta", "Cafés de variedad robusta, con mayor cuerpo y contenido en cafeína.", null, true));
+        categoryService.guardar(new Category(3L, "Tueste Claro", "Cafés con tueste claro, que preservan las notas florales y frutales del origen.", null, true));
         categoryService.guardar(new Category(4L, "Tueste Oscuro", "Cafés con tueste oscuro, con notas de chocolate, caramelo y mayor amargor.", null, true));
 
     }
