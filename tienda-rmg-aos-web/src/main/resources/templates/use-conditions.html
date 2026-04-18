@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RawBean — Condiciones de Uso</title>
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+  </script>
+
+  <link rel="stylesheet" th:href="@{/css/vendor.css}">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/apple-touch-icon.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon-16x16.png}">
+
+</head>
+
+<body id="top">
+
+<div id="preloader">
+  <div id="loader" class="dots-fade">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div id="page" class="s-pagewrap">
+
+  <header class="s-header">
+    <div class="container s-header__content">
+
+      <div class="s-header__block">
+        <div class="header-logo">
+          <a class="logo" th:href="@{/}">
+            <img th:src="@{/images/logo.svg}" alt="RawBean Homepage">
+          </a>
+        </div>
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+      </div>
+
+      <nav class="header-nav">
+        <ul class="header-nav__links">
+          <li><a th:href="@{/}">Inicio</a></li>
+          <li><a th:href="@{/categorias}">Tienda</a></li>
+          <li><a href="/aboutus.html">Sobre Nosotros</a></li>
+          <li class="current"><a th:href="@{/use-conditions}">Condiciones de Uso</a></li>
+        </ul>
+        <div class="header-contact">
+          <a href="mailto:hola@rawbean.es" class="header-contact__num btn">
+            hola@rawbean.es
+          </a>
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <section class="container" style="padding-top: 12rem; padding-bottom: 6rem;">
+
+    <div class="row">
+      <div class="column xl-12">
+        <div class="section-header" data-num="01">
+          <h2 class="text-display-title">Condiciones de Uso</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 4rem;">
+      <div class="column xl-8 lg-10 md-12">
+
+        <h4>1. Aceptación de las condiciones</h4>
+        <p>
+          El acceso y uso de la tienda online RawBean implica la aceptación plena y sin reservas
+          de todas y cada una de las presentes condiciones de uso.
+        </p>
+
+        <h4>2. Objeto</h4>
+        <p>
+          RawBean es una tienda online dedicada a la venta de café de especialidad en grano
+          y molido.
+        </p>
+
+        <h4>3. Proceso de compra</h4>
+        <p>
+          Para realizar una compra, el usuario deberá registrarse o identificarse con sus
+          credenciales. RawBean enviará una confirmación del pedido al correo electrónico facilitado.
+        </p>
+
+        <h4>4. Precios y pagos</h4>
+        <p>
+          Los precios mostrados en la tienda incluyen el IVA aplicable. RawBean se reserva el
+          derecho a modificar los precios sin previo aviso.
+        </p>
+
+        <h4>5. Envíos y plazos de entrega</h4>
+        <p>
+          Los pedidos realizados de lunes a viernes antes de las 14:00 h se procesarán el
+          mismo día. El plazo de entrega estimado es de 24 a 48 horas laborables.
+        </p>
+
+        <h4>6. Política de devoluciones</h4>
+        <p>
+          El usuario dispone de un plazo de 14 días naturales desde la recepción del pedido
+          para ejercer el derecho de desistimiento, siempre que el producto no haya sido abierto.
+        </p>
+
+        <h4>7. Protección de datos</h4>
+        <p>
+          Los datos personales facilitados serán tratados conforme al RGPD y la normativa
+          española vigente. Contacto: <a href="mailto:hola@rawbean.es">hola@rawbean.es</a>.
+        </p>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <footer id="footer" class="container s-footer">
+
+    <div class="row s-footer__main">
+      <div class="column xl-3 lg-12 footer-block s-footer__main-start">
+        <div class="s-footer__logo">
+          <a class="logo" th:href="@{/}">
+            <img th:src="@{/images/logo.svg}" alt="RawBean">
+          </a>
+        </div>
+      </div>
+      <div class="column xl-9 lg-12 s-footer__main-end grid-cols grid-cols--wrap">
+        <div class="grid-cols__column footer-block">
+          <h6>Tienda online</h6>
+          <ul class="link-list">
+            <li><a th:href="@{/categorias}">Categorías</a></li>
+            <li><a th:href="@{/}">Inicio</a></li>
+          </ul>
+        </div>
+        <div class="grid-cols__column footer-block">
+          <h6>Información</h6>
+          <ul class="link-list">
+            <li><a href="/aboutus.html">Sobre Nosotros</a></li>
+            <li><a th:href="@{/use-conditions}">Condiciones de Uso</a></li>
+          </ul>
+        </div>
+        <div class="grid-cols__column footer-block">
+          <h6>Contacto</h6>
+          <ul class="link-list">
+            <li><a href="mailto:hola@rawbean.es">hola@rawbean.es</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row s-footer__bottom">
+      <div class="column xl-6 lg-12">
+        <p class="ss-copyright">
+          <span>© RawBean 2025</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="ss-go-top">
+      <a class="smoothscroll" title="Back to Top" href="#top">
+        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+      </a>
+      <span>Back To Top</span>
+    </div>
+
+  </footer>
+
+</div>
+
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

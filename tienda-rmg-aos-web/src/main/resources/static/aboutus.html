@@ -49,7 +49,7 @@
                     <li><a href="/">Inicio</a></li>
                     <li><a href="/aboutus.html">Sobre Nosotros</a></li>
                     <li><a href="/categorias">Tienda</a></li>
-                    <li><a class="smoothscroll" href="#gallery">Galería</a></li>
+                    <li><a href="/use-conditions">Condiciones de uso</a></li>
                     <li><a class="smoothscroll" href="#origenes">Orígenes</a></li>
                 </ul>
 
@@ -107,19 +107,19 @@
         <div class="row">
 
             <div class="column xl-4 lg-6 md-12" style="margin-bottom: 4rem;">
-                <h4>Rodrigo Martínez</h4>
+                <h4>Rodrigo Martín González</h4>
                 <p style="color: #aaa; margin-bottom: 0.5rem;">Desarrollo &amp; Tostado</p>
                 <p>
-                    Desarrollador web y entusiasta del café de especialidad. Lleva años explorando
+                    Desarrollador web y entusiasta del café de especialidad. Llevo años explorando
                     diferentes orígenes y métodos de extracción, buscando siempre la taza perfecta.
                 </p>
             </div>
 
             <div class="column xl-4 lg-6 md-12" style="margin-bottom: 4rem;">
-                <h4>Alejandro Ortiz</h4>
+                <h4>Alejandro Ortega Sáiz</h4>
                 <p style="color: #aaa; margin-bottom: 0.5rem;">Desarrollo &amp; Selección de Orígenes</p>
                 <p>
-                    Apasionado del café de origen único y del desarrollo de software. Se encarga de
+                    Apasionado del café de origen único y del desarrollo de software. Encargado de
                     la selección de productores y de mantener viva la filosofía de trazabilidad de RawBean.
                 </p>
             </div>
@@ -131,32 +131,64 @@
 
     <footer id="footer" class="container s-footer">
 
+        <div class="row s-footer__top row-x-center">
+            <div class="column xl-6 lg-8 md-10 footer-block footer-newsletter">
+                <h5>
+                    Suscríbete a nuestra lista para recibir <br>
+                    Novedades, lanzamientos y ofertas exclusivas.
+                </h5>
+                <div class="subscribe-form">
+                    <form id="mc-form" class="mc-form">
+                        <div class="mc-input-wrap">
+                            <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="Tu dirección de email">
+                            <input type="submit" name="subscribe" value="Suscribirse" class="btn btn--primary">
+                        </div>
+                        <div class="mc-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="row s-footer__main">
             <div class="column xl-3 lg-12 footer-block s-footer__main-start">
                 <div class="s-footer__logo">
-                    <a class="logo" href="/">
-                        <span style="font-size: 1.8rem; font-weight: bold; color: white;">RawBean</span>
+                    <a class="logo" th:href="@{/}">
+                        <img th:src="@{/images/logo.svg}" alt="RawBean">
                     </a>
                 </div>
+                <ul class="s-footer__social social-list">
+                    <li><a href="#0"><span class="u-screen-reader-text">Instagram</span>IG</a></li>
+                    <li><a href="#0"><span class="u-screen-reader-text">Facebook</span>FB</a></li>
+                    <li><a href="#0"><span class="u-screen-reader-text">X</span>X</a></li>
+                </ul>
             </div>
+
             <div class="column xl-9 lg-12 s-footer__main-end grid-cols grid-cols--wrap">
                 <div class="grid-cols__column footer-block">
                     <h6>Tienda online</h6>
                     <ul class="link-list">
                         <li><a href="/categorias">Categorías</a></li>
                         <li><a href="/">Inicio</a></li>
+                        <li><a href="/use-conditions">Condiciones de uso</a></li>
                     </ul>
                 </div>
                 <div class="grid-cols__column footer-block">
                     <h6>Información</h6>
                     <ul class="link-list">
-                        <li><a href="/sobre-nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="/aboutus.html">Sobre nosotros</a></li>
                     </ul>
                 </div>
                 <div class="grid-cols__column footer-block">
                     <h6>Contacto</h6>
                     <ul class="link-list">
                         <li><a href="mailto:hola@rawbean.es">hola@rawbean.es</a></li>
+                    </ul>
+                </div>
+                <div class="grid-cols__column footer-block">
+                    <h6>Envíos</h6>
+                    <ul class="opening-hours">
+                        <li><span class="opening-hours__days">Pedidos L-V</span><span class="opening-hours__time">antes de las 14:00</span></li>
+                        <li><span class="opening-hours__days">Entrega</span><span class="opening-hours__time">24-48h laborables</span></li>
                     </ul>
                 </div>
             </div>
@@ -166,6 +198,7 @@
             <div class="column xl-6 lg-12">
                 <p class="ss-copyright">
                     <span>© RawBean 2025</span>
+                    <span>Design by <a href="https://styleshout.com/">StyleShout</a></span>
                 </p>
             </div>
         </div>
