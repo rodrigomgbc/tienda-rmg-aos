@@ -103,6 +103,7 @@
 
                 <h4 th:text="${categoria.nombre}" style="margin-top: 1.5rem;"></h4>
                 <p th:text="${categoria.descripcion}"></p>
+                <a th:href="@{/categorias/{id}(id=${categoria.id})}">Ver categoría</a>
 
             </div>
 
