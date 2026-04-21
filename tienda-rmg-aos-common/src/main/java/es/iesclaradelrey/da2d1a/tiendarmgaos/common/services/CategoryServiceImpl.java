@@ -27,27 +27,27 @@ public class CategoryServiceImpl implements ICategoryService{
     // Cuando haya lógica de negocio (validar nombres, reglas, etc) se mete aquí.
     @Override
     public Category guardar(Category categoria) {
-        return categoryRepository.guardar(categoria);
+        return categoryRepository.save(categoria);
     }
 
     @Override
     public Optional<Category> buscarPorId(Long id) {
-        return categoryRepository.buscarPorId(id);
+        return categoryRepository.findById(id);
     }
 
     @Override
     public Collection<Category> buscarTodos() {
-        return categoryRepository.buscarTodos();
+        return categoryRepository.findAll();
     }
 
     @Override
     public void eliminarPorId(Long id) {
-        categoryRepository.eliminarPorId(id);
+        categoryRepository.deleteById(id);
     }
 
     @Override
     public boolean existePorId(Long id) {
-        return categoryRepository.existePorId(id);
+        return categoryRepository.existsById(id);
     }
 
 }

@@ -18,14 +18,15 @@ public class DataLoader implements CommandLineRunner {
         this.categoryService = categoryService;
     }
 
+    // Id = null para que no de error hibernate ya que el id se genera de manera automática
     @Override
     public void run(String... args) throws Exception {
         // Creamos unas cuantas categorías de café de ejemplo.
         // El parámetro null del penúltimo hueco es la "imagen" -> no tienen foto.
-        categoryService.guardar(new Category(1L, "Arábica", "Cafés de variedad arábca, reconocidos por su suavidad y complejidad aromática.", null, true));
-        categoryService.guardar(new Category(2L, "Robusta", "Cafés de variedad robusta, con mayor cuerpo y contenido en cafeína.", null, true));
-        categoryService.guardar(new Category(3L, "Tueste Claro", "Cafés con tueste claro, que preservan las notas florales y frutales del origen.", null, true));
-        categoryService.guardar(new Category(4L, "Tueste Oscuro", "Cafés con tueste oscuro, con notas de chocolate, caramelo y mayor amargor.", null, true));
+        categoryService.guardar(new Category(null, "Arábica", "Cafés de variedad arábica...", null, true));
+        categoryService.guardar(new Category(null, "Robusta", "Cafés de variedad robusta...", null, true));
+        categoryService.guardar(new Category(null, "Tueste Claro", "Cafés con tueste claro...", null, true));
+        categoryService.guardar(new Category(null, "Tueste Oscuro", "Cafés con tueste oscuro...", null, true));
 
     }
 }
