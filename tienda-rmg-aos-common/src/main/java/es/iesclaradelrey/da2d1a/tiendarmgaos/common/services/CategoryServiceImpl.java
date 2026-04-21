@@ -7,15 +7,24 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Optional;
 
+// @Service -> otra anotación para que Spring sepa que esto es un bean.
+// Es igual que @Repository pero semánticamente marca "capa de servicio".
 @Service
 public class CategoryServiceImpl implements ICategoryService{
+
+    // final -> una vez asignado en el constructor ya no se puede cambiar.
+    // Es buena práctica para dependencias inyectadas.
     private final ICategoryRepository categoryRepository;
 
-    // Inyección de dependencias mediante el constructor
+    // Inyección de dependencias mediante el constructor:
+    // Spring ve que necesitamos un ICategoryRepository y nos mete el bean
+    // (CategoryRepository) automáticamente. No hacemos new en ningún lado.
     public CategoryServiceImpl(ICategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
+    // A partir de aquí, los métodos simplemente delegan en el repositorio.
+    // Cuando haya lógica de negocio (validar nombres, reglas, etc) se mete aquí.
     @Override
     public Category guardar(Category categoria) {
         return categoryRepository.guardar(categoria);

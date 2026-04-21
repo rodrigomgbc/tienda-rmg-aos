@@ -5,18 +5,23 @@ import es.iesclaradelrey.da2d1a.tiendarmgaos.common.services.ICategoryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+// Al implementar CommandLineRunner, el método run() se ejecuta automáticamente
+// nada más arrancar Spring Boot. Lo usamos para meter datos de prueba en memoria
+// (como si fuera un "seed" de BDD) porque aún no tenemos base de datos real.
 @Component
 public class DataLoader implements CommandLineRunner {
 
     private final ICategoryService categoryService;
 
+    // Inyección por constructor (igual que en el service).
     public DataLoader(ICategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
     @Override
     public void run(String... args) throws Exception {
-
+        // Creamos unas cuantas categorías de café de ejemplo.
+        // El parámetro null del penúltimo hueco es la "imagen" -> no tienen foto.
         categoryService.guardar(new Category(1L, "Arábica", "Cafés de variedad arábca, reconocidos por su suavidad y complejidad aromática.", null, true));
         categoryService.guardar(new Category(2L, "Robusta", "Cafés de variedad robusta, con mayor cuerpo y contenido en cafeína.", null, true));
         categoryService.guardar(new Category(3L, "Tueste Claro", "Cafés con tueste claro, que preservan las notas florales y frutales del origen.", null, true));
