@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface IProductService {
-    Category guardar(Product product);
+    Product guardar(Product product);
     Optional<Product> buscarPorId(Long id);
     Collection<Product> buscarTodos();
     void eliminarPorId(Long id);
