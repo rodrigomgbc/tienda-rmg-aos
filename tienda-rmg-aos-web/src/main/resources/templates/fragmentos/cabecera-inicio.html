@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--
+    FRAGMENT: header-home   (especial para index.html)
+    Incluye los enlaces internos con smoothscroll (#intro, #gallery, #origenes)
+    que sólo existen en la home.
+    Uso:   <div th:replace="~{fragmentos/cabecera-inicio :: cabecera-inicio}"></div>
+-->
+<header th:fragment="cabecera-inicio" class="s-header">
+    <div class="container s-header__content">
+
+        <div class="s-header__block">
+            <div class="header-logo">
+                <a class="logo" th:href="@{/}">
+                    <img th:src="@{/images/logo.svg}" alt="RawBean Homepage">
+                </a>
+            </div>
+            <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+        </div>
+
+        <nav class="header-nav">
+            <ul class="header-nav__links">
+                <li class="current"><a class="smoothscroll" href="#intro">Inicio</a></li>
+                <li><a th:href="@{/categorias}">Tienda</a></li>
+                <li><a th:href="@{/sobre-nosotros.html}">Sobre Nosotros</a></li>
+                <li><a class="smoothscroll" href="#gallery">Galería</a></li>
+                <li><a class="smoothscroll" href="#origenes">Orígenes</a></li>
+                <li><a th:href="@{/condiciones-uso}">Condiciones de uso</a></li>
+            </ul>
+
+            <div class="header-contact">
+                <a href="mailto:hola@rawbean.es" class="header-contact__num btn">
+                    hola@rawbean.es
+                </a>
+            </div>
+        </nav>
+
+    </div>
+</header>
+
+</body>
+</html>

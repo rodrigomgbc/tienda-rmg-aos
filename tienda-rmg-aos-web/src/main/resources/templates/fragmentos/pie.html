@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--
+    FRAGMENT: footer   (reducido, para páginas interiores)
+    Uso:   <div th:replace="~{fragmentos/pie :: pie}"></div>
+-->
+<footer th:fragment="pie" id="footer" class="container s-footer">
+
+    <div class="row s-footer__main">
+        <div class="column xl-3 lg-12 footer-block s-footer__main-start">
+            <div class="s-footer__logo">
+                <a class="logo" th:href="@{/}">
+                    <img th:src="@{/images/logo.svg}" alt="RawBean">
+                </a>
+            </div>
+        </div>
+        <div class="column xl-9 lg-12 s-footer__main-end grid-cols grid-cols--wrap">
+            <div class="grid-cols__column footer-block">
+                <h6>Tienda online</h6>
+                <ul class="link-list">
+                    <li><a th:href="@{/categorias}">Categorías</a></li>
+                    <li><a th:href="@{/}">Inicio</a></li>
+                </ul>
+            </div>
+            <div class="grid-cols__column footer-block">
+                <h6>Información</h6>
+                <ul class="link-list">
+                    <li><a th:href="@{/sobre-nosotros.html}">Sobre Nosotros</a></li>
+                    <li><a th:href="@{/condiciones-uso}">Condiciones de Uso</a></li>
+                </ul>
+            </div>
+            <div class="grid-cols__column footer-block">
+                <h6>Contacto</h6>
+                <ul class="link-list">
+                    <li><a href="mailto:hola@rawbean.es">hola@rawbean.es</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row s-footer__bottom">
+        <div class="column xl-6 lg-12">
+            <p class="ss-copyright">
+                <span>© RawBean 2025</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="ss-go-top">
+        <a class="smoothscroll" title="Back to Top" href="#top">
+            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+        </a>
+        <span>Back To Top</span>
+    </div>
+
+</footer>
+
+</body>
+</html>
