@@ -12,10 +12,10 @@ public class WebConfiguration implements WebMvcConfigurer {
     // Atajo para páginas "estáticas" que no necesitan lógica en un Controller.
     // En vez de crear un controller entero solo para devolver el HTML,
     // mapeamos la URL directamente a la vista.
-    // "/use-conditions" -> muestra templates/use-conditions.html
+    // "/condiciones-uso" -> muestra templates/condiciones-uso.html
     @Override
     public void addViewControllers(ViewControllerRegistry registro) {
-        registro.addViewController("/use-conditions")
-                .setViewName("use-conditions");
+        registro.addViewController("/condiciones-uso")
+                .setViewName("condiciones-uso");
     }
 }
