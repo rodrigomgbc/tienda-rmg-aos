@@ -12,13 +12,7 @@
     </script>
 
     <!-- CSS -->
-    <link rel="stylesheet" th:href="@{/css/vendor.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-
-    <!-- favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/apple-touch-icon.png}">
-    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon-32x32.png}">
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon-16x16.png}">
+    <th:block th:replace="~{fragmentos/recursos-head :: recursos-head}"></th:block>
 
 </head>
 
@@ -118,8 +112,7 @@
 </div> <!-- end page-wrap -->
 
 <!-- Java Script -->
-<script th:src="@{/js/plugins.js}"></script>
-<script th:src="@{/js/main.js}"></script>
+<th:block th:replace="~{fragmentos/scripts-fin :: scripts-fin}"></th:block>
 
 </body>
 </html>
