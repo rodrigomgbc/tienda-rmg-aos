@@ -4,18 +4,15 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RawBean — Productos</title>
+    <title th:text="'RawBean — ' + ${producto.nombre}">RawBean — Producto</title>
 
     <script>
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
     </script>
 
-    <!-- CSS -->
     <link rel="stylesheet" th:href="@{/css/vendor.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-
-    <!-- favicons -->
     <link rel="apple-touch-icon" sizes="180x180" th:href="@{/apple-touch-icon.png}">
     <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon-32x32.png}">
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon-16x16.png}">
@@ -24,7 +21,6 @@
 
 <body id="top">
 
-<!-- preloader -->
 <div id="preloader">
     <div id="loader" class="dots-fade">
         <div></div>
@@ -33,78 +29,66 @@
     </div>
 </div>
 
-<!-- page wrap -->
 <div id="page" class="s-pagewrap">
 
-    <!-- # site header -->
     <div th:replace="~{fragmentos/cabecera :: cabecera('shop')}"></div>
 
-    <!-- # productos -->
     <section class="container" style="padding-top: 12rem; padding-bottom: 6rem;">
 
         <div class="row">
-            <div class="column xl-12">
-                <div class="section-header" data-num="01">
-                    <h2 class="text-display-title">Nuestros Cafés</h2>
-                </div>
-            </div>
-        </div>
 
-        <div class="row" style="margin-top: 4rem;">
-
-            <!-- Una tarjeta por cada producto -->
-            <div class="column xl-3 lg-4 md-6 mob-12"
-                 th:each="producto : ${productos}"
-                 style="margin-bottom: 4rem;">
-
-                <!-- Imagen del producto -->
+            <!-- Imagen -->
+            <div class="column xl-6">
                 <figure style="position: relative;">
-                    <!-- Badge de descuento -->
                     <span th:if="${producto.descuento > 0}"
-                          style="position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;"
+                          style="position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 6px 12px; border-radius: 4px; font-size: 1rem; font-weight: bold;"
                           th:text="${producto.descuento} + '%'"></span>
 
                     <img th:if="${producto.imagen != null}"
                          th:src="@{${producto.imagen}}"
                          th:alt="'Imagen de ' + ${producto.nombre}"
-                         style="width: 100%; height: 220px; object-fit: cover;">
+                         style="width: 100%; object-fit: cover;">
 
                     <img th:if="${producto.imagen == null}"
                          th:src="@{/images/categories/no-image.webp}"
                          alt=""
-                         style="width: 100%; height: 220px; object-fit: cover;">
+                         style="width: 100%; object-fit: cover;">
                 </figure>
+            </div>
 
-                <!-- Nombre (enlace al detalle) -->
-                <h4 style="margin-top: 1.5rem;">
-                    <a th:href="@{/productos/{id}/{slug}(id=${producto.id}, slug=${T(es.iesclaradelrey.da2d1a.tiendarmgaos.web.utils.SlugUtils).toSlug(producto.nombre)})}"
-                       th:text="${producto.nombre}"></a>
-                </h4>
+            <!-- Información -->
+            <div class="column xl-6">
 
-                <!-- Marca (solo si tiene) -->
+                <h1 th:text="${producto.nombre}" style="margin-bottom: 0.5rem;"></h1>
+
                 <p th:if="${producto.marca != null}"
-                   style="color: gray; font-size: 0.9rem; margin-top: 0.25rem;"
+                   style="color: gray; font-size: 1rem; margin-bottom: 1rem;"
                    th:text="${producto.marca}"></p>
 
-                <!-- Precio con o sin descuento -->
-                <div style="margin-top: 0.5rem;">
-                    <!-- Sin descuento -->
+                <!-- EAN -->
+                <p style="font-size: 0.85rem; color: gray;">
+                    EAN: <span th:text="${producto.codigoEan}"></span>
+                </p>
+
+                <!-- Precio -->
+                <div style="margin: 1.5rem 0;">
                     <span th:if="${producto.descuento == 0}"
-                          style="font-size: 1.2rem; font-weight: bold;"
+                          style="font-size: 2rem; font-weight: bold;"
                           th:text="${#numbers.formatDecimal(producto.precio, 1, 2)} + ' €'"></span>
 
-                    <!-- Con descuento -->
                     <span th:if="${producto.descuento > 0}">
-                        <span style="font-size: 1.2rem; font-weight: bold; color: #e74c3c;"
+                        <span style="font-size: 2rem; font-weight: bold; color: #e74c3c;"
                               th:text="${#numbers.formatDecimal(producto.precio * (1 - producto.descuento / 100.0), 1, 2)} + ' €'"></span>
-                        <span style="text-decoration: line-through; color: gray; margin-left: 0.5rem; font-size: 0.9rem;"
+                        <span style="text-decoration: line-through; color: gray; margin-left: 1rem; font-size: 1.2rem;"
                               th:text="${#numbers.formatDecimal(producto.precio, 1, 2)} + ' €'"></span>
                     </span>
                 </div>
 
-                <!-- Primeros 200 caracteres de la descripción -->
-                <p style="margin-top: 0.75rem; font-size: 1.6rem;"
-                   th:text="${#strings.abbreviate(producto.descripcion, 200)}"></p>
+                <!-- Descripción completa -->
+                <p th:text="${producto.descripcion}" style="font-size: 1rem; line-height: 1.8;"></p>
+
+                <!-- Volver -->
+                <a th:href="@{/productos}" style="margin-top: 2rem; display: inline-block;">← Volver al listado</a>
 
             </div>
 
@@ -112,12 +96,10 @@
 
     </section>
 
-    <!-- # footer -->
     <div th:replace="~{fragmentos/pie :: pie}"></div>
 
-</div> <!-- end page-wrap -->
+</div>
 
-<!-- Java Script -->
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 

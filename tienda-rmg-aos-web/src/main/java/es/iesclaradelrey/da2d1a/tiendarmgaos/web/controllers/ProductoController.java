@@ -1,24 +1,36 @@
 package es.iesclaradelrey.da2d1a.tiendarmgaos.web.controllers;
 
+import es.iesclaradelrey.da2d1a.tiendarmgaos.common.entities.Producto;
+import es.iesclaradelrey.da2d1a.tiendarmgaos.common.utils.SlugUtils;
 import org.springframework.ui.Model;
-import es.iesclaradelrey.da2d1a.tiendarmgaos.common.services.IProductoService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-@Controller
-@RequestMapping("/productos")
-public class ProductoController {
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
-    private final IProductoService productoService;
-
-    public ProductoController(IProductoService productoService) {
-        this.productoService = productoService;
+@GetMapping({"", "/"})
+public String listar(Model model) {
+    Collection<Producto> productos = productoService.buscarTodos();
+    Map<Long, String> slugs = new HashMap<>();
+    for (Producto p : productos) {
+        slugs.put(p.getId(), SlugUtils.toSlug(p.getNombre()));
     }
+    model.addAttribute("productos", productos);
+    model.addAttribute("slugs", slugs);
+    return "productos/lista";
+}
 
-    @GetMapping({"", "/"})
-    public String listar(Model model) {
-        model.addAttribute("productos", productoService.buscarTodos());
-        return "productos/lista";
+@GetMapping({"/{id}/{slug}", "/{id}"})
+public String detalle(@PathVariable Long id,
+                      @PathVariable(required = false) String slug,
+                      Model model) {
+    Optional<Producto> producto = productoService.buscarPorId(id);
+    if (producto.isEmpty()) {
+        return "redirect:/productos";
     }
+    model.addAttribute("producto", producto.get());
+    return "productos/detalle";
 }
