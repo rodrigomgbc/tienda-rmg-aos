@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--
+    FRAGMENT: scripts-fin
+    Uso:   <th:block th:replace="~{fragmentos/scripts-fin :: scripts-fin}"></th:block>
+    Contiene: scripts JS que van al final del <body> (plugins y main).
+-->
+<th:block th:fragment="scripts-fin">
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</th:block>
+
+</body>
+</html>

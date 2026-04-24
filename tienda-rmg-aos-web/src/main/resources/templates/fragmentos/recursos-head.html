@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!--
+    FRAGMENT: recursos-head
+    Uso:   <th:block th:replace="~{fragmentos/recursos-head :: recursos-head}"></th:block>
+    Contiene: hojas de estilo del proyecto y favicons.
+    El <title> NO se incluye aqui porque cambia en cada pagina.
+-->
+<th:block th:fragment="recursos-head">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/vendor.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon-16x16.png}">
+
+</th:block>
+
+</head>
+</html>
