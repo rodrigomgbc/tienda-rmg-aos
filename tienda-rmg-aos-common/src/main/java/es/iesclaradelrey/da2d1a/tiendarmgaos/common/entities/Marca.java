@@ -3,13 +3,18 @@ package es.iesclaradelrey.da2d1a.tiendarmgaos.common.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-// Clase que representa una Marca de café (la marca a la que pertenece cada producto).
-// Usamos el mismo patrón que Categoria:
+import java.util.HashSet;
+import java.util.Set;
+
+// Clase que representa una Marca de cafe (la marca a la que pertenece cada producto).
+// Usamos el mismo patron que Categoria:
 //   @Data            -> getters, setters, toString, equals y hashCode
-//   @NoArgsConstructor  -> constructor vacío (lo necesita JPA al instanciar desde la BD)
-//   @AllArgsConstructor -> constructor con todos los campos (cómodo al crear objetos)
+//   @NoArgsConstructor  -> constructor vacio (lo necesita JPA al instanciar desde la BD)
+//   @AllArgsConstructor -> constructor con todos los campos (comodo al crear objetos)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +24,7 @@ public class Marca {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;                // clave única de cada marca
+    private Long id;                // clave unica de cada marca
 
     @Column(length = 100, nullable = false, unique = true)
     private String nombre;          // ej: "Illy", "Saimaza"
@@ -32,7 +37,14 @@ public class Marca {
 
     private Boolean activo;         // por si en el futuro queremos ocultarla sin borrar
 
-    // no ponemos aqui la relacion @OneToMany con Producto todavia.
-    // Esa la añadimos en el paso 2 junto con el @ManyToOne del lado Producto.
-    // Si la pones ahora a medias, Hibernate no arranca y nos volvemos locos.
+    // Lado inverso de la relacion Producto->Marca.
+    //   mappedBy = "marca"  -> apunta al campo 'marca' de la clase Producto.
+    //   No se crea columna en esta tabla; la FK vive en la tabla productos.
+    //   Por defecto es LAZY, asi que solo se cargan los productos al pedirlos.
+    // Excluimos la coleccion del toString/equals/hashCode para evitar bucles infinitos
+    // (Producto.toString -> Marca.toString -> productos -> Producto.toString -> ...).
+    @OneToMany(mappedBy = "marca")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Producto> productos = new HashSet<>();
 }

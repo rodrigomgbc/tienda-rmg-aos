@@ -78,7 +78,7 @@
                 <!-- Marca (solo si tiene) -->
                 <p th:if="${producto.marca != null}"
                    style="color: gray; font-size: 0.9rem; margin-top: 0.25rem;"
-                   th:text="${producto.marca}"></p>
+                   th:text="${producto.marca.nombre}"></p>
 
                 <!-- Precio con o sin descuento -->
                 <div style="margin-top: 0.5rem;">
