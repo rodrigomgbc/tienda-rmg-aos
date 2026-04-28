@@ -77,8 +77,11 @@
 
                 <!-- Marca (solo si tiene) -->
                 <p th:if="${producto.marca != null}"
-                   style="color: gray; font-size: 0.9rem; margin-top: 0.25rem;"
-                   th:text="${producto.marca.nombre}"></p>
+                   style="color: gray; font-size: 0.9rem; margin-top: 0.25rem;">
+                    <a th:href="@{/marcas/{id}/{slug}(id=${producto.marca.id}, slug=${T(es.iesclaradelrey.da2d1a.tiendarmgaos.common.utils.SlugUtils).toSlug(producto.marca.nombre)})}"
+                       style="color: gray;"
+                       th:text="${producto.marca.nombre}"></a>
+                </p>
 
                 <!-- Precio con o sin descuento -->
                 <div style="margin-top: 0.5rem;">

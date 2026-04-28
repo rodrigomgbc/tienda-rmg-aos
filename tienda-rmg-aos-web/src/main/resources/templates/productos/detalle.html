@@ -58,8 +58,11 @@
                 <h1 th:text="${producto.nombre}" style="margin-bottom: 0.5rem;"></h1>
 
                 <p th:if="${producto.marca != null}"
-                   style="color: gray; font-size: 1rem; margin-bottom: 1rem;"
-                   th:text="${producto.marca.nombre}"></p>
+                   style="color: gray; font-size: 1rem; margin-bottom: 1rem;">
+                    <a th:href="@{/marcas/{id}/{slug}(id=${producto.marca.id}, slug=${T(es.iesclaradelrey.da2d1a.tiendarmgaos.common.utils.SlugUtils).toSlug(producto.marca.nombre)})}"
+                       style="color: gray;"
+                       th:text="${producto.marca.nombre}"></a>
+                </p>
 
                 <!-- EAN -->
                 <p style="font-size: 0.85rem; color: gray;">
