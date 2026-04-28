@@ -77,7 +77,7 @@
 
                 <!-- Marca (solo si tiene) -->
                 <p th:if="${producto.marca != null}"
-                   style="color: gray; font-size: 0.9rem; margin-top: 0.25rem;">
+                   style="color: gray; font-size: 2rem; margin-top: 0.25rem;">
                     <a th:href="@{/marcas/{id}/{slug}(id=${producto.marca.id}, slug=${T(es.iesclaradelrey.da2d1a.tiendarmgaos.common.utils.SlugUtils).toSlug(producto.marca.nombre)})}"
                        style="color: gray;"
                        th:text="${producto.marca.nombre}"></a>
