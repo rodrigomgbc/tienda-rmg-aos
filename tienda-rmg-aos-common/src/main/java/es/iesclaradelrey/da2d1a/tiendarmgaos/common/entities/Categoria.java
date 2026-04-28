@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "categories")
+@Table(name = "categorias")
 @Entity
 public class Categoria {
     @Id
