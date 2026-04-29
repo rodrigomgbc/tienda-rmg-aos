@@ -63,6 +63,27 @@
                        style="color: gray;"
                        th:text="${producto.marca.nombre}"></a>
                 </p>
+                <!-- Categorias del producto (PDF 7 - render condicional) -->
+                <!-- 0 categorias -> no aparece nada -->
+                <!-- 1 categoria  -> parrafo con enlace -->
+                <p th:if="${producto.categorias.size() == 1}"
+                   style="margin-bottom: 1rem; font-size: 1rem;">
+                    <span th:each="cat : ${producto.categorias}">
+                        <a th:href="@{/categorias/{id}(id=${cat.id})}"
+                           style="color: #888;"
+                           th:text="${cat.nombre}"></a>
+                    </span>
+                </p>
+                <!-- Varias categorias -> lista <ul><li> con enlaces -->
+                <ul th:if="${producto.categorias.size() > 1}"
+                    style="margin-bottom: 1rem; padding-left: 1.5rem; font-size: 1rem;">
+                    <li th:each="cat : ${producto.categorias}">
+                        <a th:href="@{/categorias/{id}(id=${cat.id})}"
+                           style="color: #888;"
+                           th:text="${cat.nombre}"></a>
+                    </li>
+                </ul>
+
 
                 <!-- EAN -->
                 <p style="font-size: 0.85rem; color: gray;">
