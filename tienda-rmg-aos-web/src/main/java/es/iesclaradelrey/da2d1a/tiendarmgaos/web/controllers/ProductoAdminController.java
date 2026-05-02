@@ -7,11 +7,7 @@ import es.iesclaradelrey.da2d1a.tiendarmgaos.common.services.IMarcaService;
 import es.iesclaradelrey.da2d1a.tiendarmgaos.common.services.IProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -69,6 +65,49 @@ public class ProductoAdminController {
                         .map(Optional::get)
                         .collect(Collectors.toSet());
                 producto.setCategorias(cats);
+            }
+            productoService.guardar(producto);
+            return "redirect:/admin/productos";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("marcas", marcaService.buscarTodos());
+            model.addAttribute("categorias", categoriaService.buscarTodos());
+            return "admin/productos/formulario";
+        }
+    }
+
+    @GetMapping("/{id}/edit")
+    public String formularioEditar(@PathVariable Long id, Model model) {
+        Optional<Producto> producto = productoService.buscarPorId(id);
+        if (producto.isEmpty()) {
+            return "redirect:/admin/productos";
+        }
+        model.addAttribute("producto", producto.get());
+        model.addAttribute("marcas", marcaService.buscarTodos());
+        model.addAttribute("categorias", categoriaService.buscarTodos());
+        return "admin/productos/formulario";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String guardarEdicion(@PathVariable Long id,
+                                 @ModelAttribute Producto producto,
+                                 @RequestParam(required = false) Long marcaId,
+                                 @RequestParam(required = false) List<Long> categoriasIds,
+                                 Model model) {
+        try {
+            producto.setId(id);
+            if (marcaId != null) {
+                marcaService.buscarPorId(marcaId).ifPresent(producto::setMarca);
+            }
+            if (categoriasIds != null) {
+                Set<Categoria> cats = categoriasIds.stream()
+                        .map(categoriaService::buscarPorId)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .collect(Collectors.toSet());
+                producto.setCategorias(cats);
+            } else {
+                producto.setCategorias(new java.util.HashSet<>());
             }
             productoService.guardar(producto);
             return "redirect:/admin/productos";

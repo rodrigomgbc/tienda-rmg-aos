@@ -13,7 +13,7 @@
 
 <div class="container py-5">
 
-    <h1 class="h3 mb-4">Nueva marca</h1>
+    <h1 class="h3 mb-4" th:text="${marca.id == null} ? 'Nueva marca' : 'Editar marca'"></h1>
 
     <!-- Mensaje de error -->
     <div th:if="${error}" class="alert alert-danger" role="alert">
@@ -23,7 +23,8 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <form th:action="@{/admin/marcas/new}" th:object="${marca}" method="post">
+            <form th:action="${marca.id == null} ? @{/admin/marcas/new} : @{/admin/marcas/{id}/edit(id=${marca.id})}"
+                  th:object="${marca}" method="post">
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>

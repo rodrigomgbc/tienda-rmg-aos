@@ -13,7 +13,7 @@
 
 <div class="container py-5">
 
-    <h1 class="h3 mb-4">Nuevo producto</h1>
+    <h1 class="h3 mb-4" th:text="${producto.id == null} ? 'Nuevo producto' : 'Editar producto'"></h1>
 
     <div th:if="${error}" class="alert alert-danger" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -22,7 +22,9 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <form th:action="@{/admin/productos/new}" th:object="${producto}" method="post">
+            <form th:with="accion=${producto.id == null} ? '/admin/productos/new' : '/admin/productos/' + ${producto.id} + '/edit'"
+                  th:action="@{${accion}}"
+                  th:object="${producto}" method="post">
 
                 <div class="row">
                     <div class="col-md-8 mb-3">
