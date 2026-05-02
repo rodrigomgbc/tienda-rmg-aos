@@ -69,4 +69,38 @@ public class MarcaAdminController {
             return "admin/marcas/formulario";
         }
     }
+
+    @GetMapping("/{id}/delete")
+    public String formularioEliminar(@PathVariable Long id, Model model) {
+        Optional<Marca> marca = marcaService.buscarPorId(id);
+        if (marca.isEmpty()) {
+            return "redirect:/admin/marcas";
+        }
+        model.addAttribute("marca", marca.get());
+        return "admin/marcas/eliminar";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String eliminar(@PathVariable Long id, Model model) {
+        try {
+            Optional<Marca> marca = marcaService.buscarPorId(id);
+            if (marca.isEmpty()) {
+                return "redirect:/admin/marcas";
+            }
+            if (!marca.get().getProductos().isEmpty()) {
+                model.addAttribute("marca", marca.get());
+                model.addAttribute("error", "No se puede eliminar la marca \""
+                        + marca.get().getNombre()
+                        + "\" porque tiene productos asociados.");
+                return "admin/marcas/eliminar";
+            }
+            marcaService.eliminarPorId(id);
+            return "redirect:/admin/marcas";
+        } catch (Exception e) {
+            Optional<Marca> marca = marcaService.buscarPorId(id);
+            marca.ifPresent(m -> model.addAttribute("marca", m));
+            model.addAttribute("error", e.getMessage());
+            return "admin/marcas/eliminar";
+        }
+    }
 }

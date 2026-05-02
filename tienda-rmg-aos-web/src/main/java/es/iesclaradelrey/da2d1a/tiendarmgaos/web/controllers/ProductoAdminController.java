@@ -118,4 +118,27 @@ public class ProductoAdminController {
             return "admin/productos/formulario";
         }
     }
+
+    @GetMapping("/{id}/delete")
+    public String formularioEliminar(@PathVariable Long id, Model model) {
+        Optional<Producto> producto = productoService.buscarPorId(id);
+        if (producto.isEmpty()) {
+            return "redirect:/admin/productos";
+        }
+        model.addAttribute("producto", producto.get());
+        return "admin/productos/eliminar";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String eliminar(@PathVariable Long id, Model model) {
+        try {
+            productoService.eliminarPorId(id);
+            return "redirect:/admin/productos";
+        } catch (Exception e) {
+            Optional<Producto> producto = productoService.buscarPorId(id);
+            producto.ifPresent(p -> model.addAttribute("producto", p));
+            model.addAttribute("error", e.getMessage());
+            return "admin/productos/eliminar";
+        }
+    }
 }
