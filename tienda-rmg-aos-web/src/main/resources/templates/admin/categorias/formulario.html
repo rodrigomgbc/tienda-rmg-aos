@@ -24,24 +24,24 @@
         <div class="card-body">
             <form th:action="@{/admin/categorias/{id}/edit(id=${categoria.id})}"
                   th:if="${categoria.id != null}"
-                  th:object="${categoria}" method="post">
+                  th:object="${categoria}" method="post" novalidate>
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="nombre"
-                           th:field="*{nombre}" maxlength="100">
+                           th:field="*{nombre}">
                 </div>
 
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripción</label>
                     <textarea class="form-control" id="descripcion"
-                              th:field="*{descripcion}" rows="4" maxlength="2000"></textarea>
+                              th:field="*{descripcion}" rows="4"></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="imagen" class="form-label">Imagen (ruta)</label>
                     <input type="text" class="form-control" id="imagen"
-                           th:field="*{imagen}" maxlength="500">
+                           th:field="*{imagen}">
                 </div>
 
                 <div class="mb-3 form-check">
@@ -62,24 +62,24 @@
 
             <form th:action="@{/admin/categorias/new}"
                   th:if="${categoria.id == null}"
-                  th:object="${categoria}" method="post">
+                  th:object="${categoria}" method="post" novalidate>
 
                 <div class="mb-3">
                     <label for="nombre2" class="form-label">Nombre <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="nombre2"
-                           th:field="*{nombre}" maxlength="100">
+                           th:field="*{nombre}">
                 </div>
 
                 <div class="mb-3">
                     <label for="descripcion2" class="form-label">Descripción</label>
                     <textarea class="form-control" id="descripcion2"
-                              th:field="*{descripcion}" rows="4" maxlength="2000"></textarea>
+                              th:field="*{descripcion}" rows="4"></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="imagen2" class="form-label">Imagen (ruta)</label>
                     <input type="text" class="form-control" id="imagen2"
-                           th:field="*{imagen}" maxlength="500">
+                           th:field="*{imagen}">
                 </div>
 
                 <div class="mb-3 form-check">

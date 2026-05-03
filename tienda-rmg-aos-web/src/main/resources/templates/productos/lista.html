@@ -44,85 +44,112 @@
             </div>
         </div>
 
-        <div class="row" style="margin-top: 4rem;">
+        <!-- ============================================================
+             REJILLA DE PRODUCTOS
+             Hago el row con flex para que todas las tarjetas de la misma fila
+             tengan exactamente la misma altura. align-items: stretch hace que
+             todas se estiren. Asi luego con los min-height de cada zona
+             consigo que TODO quede a la misma altura entre productos.
+             ============================================================ -->
+        <div class="row" style="margin-top: 4rem; display: flex; flex-wrap: wrap; align-items: stretch;">
 
-            <!-- Una tarjeta por cada producto -->
+            <!-- Cada producto va en una columna. Le doy display flex columna
+                 para apilar imagen, nombre, marca, categorias, precio y
+                 descripcion uno debajo del otro y poder controlar las alturas. -->
             <div class="column xl-3 lg-4 md-6 mob-12"
                  th:each="producto : ${productos}"
-                 style="margin-bottom: 4rem;">
+                 style="margin-bottom: 4rem; display: flex; flex-direction: column;">
 
-                <!-- Imagen del producto -->
-                <figure style="position: relative;">
-                    <!-- Badge de descuento -->
+                <!-- Imagen del producto - altura fija de 220px para que
+                     todas las imagenes ocupen exactamente lo mismo -->
+                <figure style="position: relative; margin: 0;">
+                    <!-- Etiqueta del descuento (solo si lo tiene). Va encima
+                         de la imagen con position absolute. -->
                     <span th:if="${producto.descuento > 0}"
                           style="position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;"
                           th:text="${producto.descuento} + '%'"></span>
 
+                    <!-- Si tiene imagen propia la pongo, si no, una de fallback
+                         para que la tarjeta no quede vacia -->
                     <img th:if="${producto.imagen != null}"
                          th:src="@{${producto.imagen}}"
                          th:alt="'Imagen de ' + ${producto.nombre}"
-                         style="width: 100%; height: 220px; object-fit: cover;">
+                         style="width: 100%; height: 220px; object-fit: cover; display: block;">
 
                     <img th:if="${producto.imagen == null}"
                          th:src="@{/images/categories/no-image.webp}"
                          alt=""
-                         style="width: 100%; height: 220px; object-fit: cover;">
+                         style="width: 100%; height: 220px; object-fit: cover; display: block;">
                 </figure>
 
-                <!-- Nombre (enlace al detalle) -->
-                <h4 style="margin-top: 1.5rem;">
+                <!-- Nombre del producto. min-height de 4.5rem para que reserve
+                     siempre espacio de 2 lineas, asi nombres cortos como
+                     "Cafe Yemen Moka" y largos como "Cafe Tueste Claro Colombia"
+                     ocupen lo mismo y no descuadren la tarjeta. -->
+                <h4 style="margin-top: 1.2rem; margin-bottom: 0; min-height: 4.5rem; line-height: 1.2;">
                     <a th:href="@{/productos/{id}/{slug}(id=${producto.id}, slug=${slugs[producto.id]})}"
                        th:text="${producto.nombre}"></a>
                 </h4>
 
-                <!-- Marca (solo si tiene) -->
-                <p th:if="${producto.marca != null}"
-                   style="color: gray; font-size: 2rem; margin-top: 0.25rem;">
+                <!-- Marca. La marca es OBLIGATORIA en el modelo (ManyToOne con
+                     optional=false) asi que siempre la tendremos, por eso no hace
+                     falta th:if. Le pongo tamaño normal y un margen pequeño. -->
+                <p style="color: gray; font-size: 1.3rem; margin-top: 0.3rem; margin-bottom: 0;">
                     <a th:href="@{/marcas/{id}/{slug}(id=${producto.marca.id}, slug=${T(es.iesclaradelrey.da2d1a.tiendarmgaos.common.utils.SlugUtils).toSlug(producto.marca.nombre)})}"
                        style="color: gray;"
                        th:text="${producto.marca.nombre}"></a>
                 </p>
-                <!-- Categorias del producto (PDF 7 - render condicional) -->
-                <!-- 0 categorias -> no aparece nada -->
-                <!-- 1 categoria  -> parrafo con enlace -->
-                <p th:if="${producto.categorias.size() == 1}"
-                   style="margin-top: 0.5rem; font-size: 0.95rem;">
-                    <span th:each="cat : ${producto.categorias}">
-                        <a th:href="@{/categorias/{id}(id=${cat.id})}"
-                           style="color: #888;"
-                           th:text="${cat.nombre}"></a>
-                    </span>
-                </p>
-                <!-- Varias categorias -> lista <ul><li> con enlaces -->
-                <ul th:if="${producto.categorias.size() > 1}"
-                    style="margin-top: 0.5rem; padding-left: 1.5rem; font-size: 0.95rem;">
-                    <li th:each="cat : ${producto.categorias}">
-                        <a th:href="@{/categorias/{id}(id=${cat.id})}"
-                           style="color: #888;"
-                           th:text="${cat.nombre}"></a>
-                    </li>
-                </ul>
 
+                <!-- Bloque de categorias. PDF 7 - render condicional:
+                       0 categorias -> nada
+                       1 categoria  -> parrafo con enlace
+                       varias       -> ul/li con enlaces
+                     min-height de 5rem reserva espacio para hasta 3 categorias
+                     (que es el maximo que tenemos en data.sql). Asi todas las
+                     tarjetas tienen el mismo bloque de categorias aunque tengan
+                     0, 1 o 3 categorias. -->
+                <div style="min-height: 5rem; margin-top: 0.4rem;">
+                    <p th:if="${producto.categorias.size() == 1}"
+                       style="margin: 0; font-size: 1.2rem;">
+                        <span th:each="cat : ${producto.categorias}">
+                            <a th:href="@{/categorias/{id}(id=${cat.id})}"
+                               style="color: #888;"
+                               th:text="${cat.nombre}"></a>
+                        </span>
+                    </p>
+                    <ul th:if="${producto.categorias.size() > 1}"
+                        style="margin: 0; padding: 0; list-style: none; font-size: 1.2rem;">
+                        <li th:each="cat : ${producto.categorias}" style="line-height: 1.5;">
+                            <a th:href="@{/categorias/{id}(id=${cat.id})}"
+                               style="color: #888;"
+                               th:text="${cat.nombre}"></a>
+                        </li>
+                    </ul>
+                </div>
 
-                <!-- Precio con o sin descuento -->
-                <div style="margin-top: 0.5rem;">
-                    <!-- Sin descuento -->
+                <!-- Precio (con o sin descuento). Va siempre en la misma
+                     posicion vertical porque todo lo de arriba tiene altura
+                     reservada. -->
+                <div style="margin-top: 0.4rem;">
                     <span th:if="${producto.descuento == 0}"
-                          style="font-size: 1.2rem; font-weight: bold;"
+                          style="font-size: 1.3rem; font-weight: bold;"
                           th:text="${#numbers.formatDecimal(producto.precio, 1, 2)} + ' €'"></span>
-
-                    <!-- Con descuento -->
                     <span th:if="${producto.descuento > 0}">
-                        <span style="font-size: 1.2rem; font-weight: bold; color: #e74c3c;"
+                        <span style="font-size: 1.3rem; font-weight: bold; color: #e74c3c;"
                               th:text="${#numbers.formatDecimal(producto.precio * (1 - producto.descuento / 100.0), 1, 2)} + ' €'"></span>
-                        <span style="text-decoration: line-through; color: gray; margin-left: 0.5rem; font-size: 0.9rem;"
+                        <span style="text-decoration: line-through; color: gray; margin-left: 0.4rem; font-size: 1rem;"
                               th:text="${#numbers.formatDecimal(producto.precio, 1, 2)} + ' €'"></span>
                     </span>
                 </div>
 
-                <!-- Primeros 200 caracteres de la descripción -->
-                <p style="margin-top: 0.75rem; font-size: 1.6rem;"
-                   th:text="${#strings.abbreviate(producto.descripcion, 200)}"></p>
+                <!-- Descripcion truncada a 3 lineas con line-clamp. Asi todas
+                     las descripciones ocupan exactamente el mismo alto, no
+                     importa si la del producto es mas larga o mas corta.
+                     line-clamp pone "..." al final si pasa de 3 lineas. -->
+                <p style="margin-top: 0.5rem; margin-bottom: 0; font-size: 1.4rem; line-height: 1.4;
+                          display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+                          overflow: hidden;"
+                   th:text="${producto.descripcion}"></p>
 
             </div>
 

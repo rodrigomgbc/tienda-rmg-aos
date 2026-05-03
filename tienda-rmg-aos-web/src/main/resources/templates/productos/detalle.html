@@ -67,16 +67,16 @@
                 <!-- 0 categorias -> no aparece nada -->
                 <!-- 1 categoria  -> parrafo con enlace -->
                 <p th:if="${producto.categorias.size() == 1}"
-                   style="margin-bottom: 1rem; font-size: 1rem;">
+                   style="margin-bottom: 1rem; font-size: 1.3rem;">
                     <span th:each="cat : ${producto.categorias}">
                         <a th:href="@{/categorias/{id}(id=${cat.id})}"
                            style="color: #888;"
                            th:text="${cat.nombre}"></a>
                     </span>
                 </p>
-                <!-- Varias categorias -> lista <ul><li> con enlaces -->
+                <!-- Varias categorias -> lista <ul><li> sin viñetas (con CSS) -->
                 <ul th:if="${producto.categorias.size() > 1}"
-                    style="margin-bottom: 1rem; padding-left: 1.5rem; font-size: 1rem;">
+                    style="margin-bottom: 1rem; padding: 0; list-style: none; font-size: 1.3rem;">
                     <li th:each="cat : ${producto.categorias}">
                         <a th:href="@{/categorias/{id}(id=${cat.id})}"
                            style="color: #888;"
